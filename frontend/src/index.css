@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root{
+  --dark-color: #1C1C1C;
+  --white-color: #FFFFFF;
+  --gray-color: #C4C4C4;
+  --principal-color: #DC9757;
+  --principal-font: 'Inter', sans-serif;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  transition: .3s;
+}
+
+body{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ul, li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: #fff;
+}
+
+img{
+  max-width: 100%;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+h2{
+  font-family: var(--principal-font);
+  color: #444444;
+}
+
+h3{
+  font-family: var(--principal-font);
+  color: var(--dark-color);
+}
+
+span{
+  font-family: var(--principal-font);
+  font-size: 1rem;
+}
+
+.stroke{
+  font-weight: bold;
+  color: var(--principal-color);
+}
+
+.agree-btn{
+  background-color: var(--principal-color);
+  padding: 5px 15px;
+  color: var(--white-color);
+  font-family: var(--principal-font);
+  font-weight: 400;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+
+.row{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.active{
+  background-color: var(--principal-color);
+  width: 100%;
+}

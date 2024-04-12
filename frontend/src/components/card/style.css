@@ -1,0 +1,46 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: var(--white-color);
+    font-family: var(--principal-font);
+}
+
+.card img{
+    width: 250px;
+    height: 200px;
+}
+
+.card span{
+    color: #c4c4c4;
+}
+
+.card .column{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.card .row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+}
+
+.card .row svg{
+    color: orange;
+}

@@ -1,0 +1,47 @@
+.largeCardContainer{
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.largeCardContainer h2{
+    color: #fff;
+    margin-left: 25px;
+    font-size: 3rem;
+    opacity: 0;
+}
+
+.moveTitle{
+    animation: moveTitle .5s forwards;
+}
+
+.removeTitle{
+    animation: removeTitle .5s forwards;
+}
+
+@keyframes moveTitle{
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+@keyframes removeTitle{
+    0%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+}

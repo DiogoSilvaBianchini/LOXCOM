@@ -1,14 +1,28 @@
 import userModel from '../models/userSchema.js'
 import bcrypt from 'bcryptjs'
+import {deleteAllProductsForUser, removeAllProductsForUse} from '../middlewares/productsMiddlewares.js'
+
 class UserControllers{
-    static async login(req,res,next){
-        const {email, password} = req.body
+    static async loginForGoogle(req,res,next){
+        const {email} = req.body
         try {
-            const findUsers = await userModel.findOne({email}, ["email", "password"])
+            const findUsers = await userModel.findOne({email}, ["email"])
+            if(!findUsers) return res.status(400).json({message: "Email/Senha Não registrado", status: 401})
             
-            if(!findUsers) return res.status(400).json({message: "Email/Senha inválidos", status: 401})
-            const comparePassword = await bcrypt.compare(password, findUsers.password)
-            if(!comparePassword) return res.status(400).json({message: "Email/Senha inválidos", status: 401})
+            const id = findUsers._id.toString()
+            next(id)
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async login(req,res,next){
+        const {email} = req.body
+        try {
+            const findUsers = await userModel.findOne({email}, ["email","password"])
+            const checkPassword = await bcrypt.compare(findUsers.password)
+            
+            if(!findUsers) return res.status(400).json({message: "Email/Senha Incorretos", status: 401})
+            if(!checkPassword) return res.status(400).json({message: "Email/Senha Incorretos", status: 401})
             
             const id = findUsers._id.toString()
             next(id)
@@ -57,20 +71,20 @@ class UserControllers{
         }
     }
     
-    static async updateUser(req,res,next){
-        const id = req.params.id
+    static async updateUser(userId, req,res,next){
         try {
-            await userModel.findByIdAndUpdate({_id: id}, req.body)
+            await userModel.findByIdAndUpdate({_id: userId}, req.body)
             return res.status(200).json({message: "Dados atualizados com sucesso", status: 200})
         } catch (error) {
             next(error)  
         }
     }
 
-    static async removeUser(req,res,next){
-        const id = req.params.id
+    static async removeUser(userId, req,res,next){
         try {
-            await userModel.findByIdAndDelete({_id: id})
+            deleteAllProductsForUser(userId)
+            removeAllProductsForUse(userId)
+            await userModel.findByIdAndDelete({_id: userId})
             return res.status(200).json({message: "Usuario removido com sucesso", status: 200})
         } catch (error) {
             next(error)   

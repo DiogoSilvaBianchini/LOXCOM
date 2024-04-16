@@ -1,0 +1,39 @@
+.loginContainer{
+    width: 100%;
+    margin: 0 auto;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.loginContainer h2{
+    font-size: 2rem;
+}
+
+.loginContainer form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.loginContainer form .small{
+    font-size: .8rem;
+}
+
+.loginContainer form button{
+    width: 100%;
+    padding: 10px 0px;
+    background-color: #222;
+    color: #fff;
+    font-size: 1.2rem;
+}
+.loginContainer .auth{
+    border-top: 1px solid #c4c4c4;
+    padding-top: 25px;
+}
+

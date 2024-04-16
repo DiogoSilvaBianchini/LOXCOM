@@ -22,19 +22,28 @@ app.use(routes)
 // eslint-disable-next-line no-unused-vars
 app.use((error,req,res,next) => {
     console.log(error)
-    if(error instanceof mongoose.Error.ValidationError){
-        const err = Object.values(error.errors).map(err => err.message)
-        return res.status(401).json({message: err, status: 401})
+    try {
+        if(error instanceof mongoose.Error.ValidationError){
+            const err = Object.values(error.errors).map(err => err.message)
+            return res.status(401).json({message: err, status: 401})
+        }
+    
+        if(error.message.includes("E11000")){
+            return res.status(500).json({message: "E-mail já cadastrado"})
+        }
+    
+        if(error instanceof multer.MulterError){
+            return res.status(400).json({message: "Imagem inválida"})
+        }
+    
+        if(error.message.includes("Cannot set headers")){
+            return res.status(400).json({message: "Erro não encontrado"})
+        }
+    
+        return res.status(500).json({message: "Erro interno do servidor"})
+    } catch (error) {
+        return res.status(500).json({message: "Erro interno do servidor"})
     }
-
-    if(error.message.includes("E11000")){
-        return res.status(500).json({message: "E-mail já cadastrado"})
-    }
-
-    if(error instanceof multer.MulterError){
-        return res.status(400).json({message: "Imagem inválida"})
-    }
-    return res.status(500).json({message: "Erro interno do servidor"})
 })
 
 // eslint-disable-next-line no-unused-vars

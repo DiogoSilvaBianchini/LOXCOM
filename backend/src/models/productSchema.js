@@ -18,7 +18,7 @@ const productSchema = new Schema({
     },
     category: {
         type: Array,
-        required: [true, "O Categoria é obrigatorio"]
+        required: [true, "A Categoria é obrigatorio"]
     },
     imgs: {
         type: Array,

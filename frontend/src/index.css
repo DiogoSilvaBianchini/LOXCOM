@@ -6,12 +6,12 @@
   --gray-color: #C4C4C4;
   --principal-color: #DC9757;
   --principal-font: 'Inter', sans-serif;
+  --error-color: #dd0000;
 }
 
 *{
   margin: 0;
   padding: 0;
-  transition: .3s;
 }
 
 body{
@@ -53,6 +53,24 @@ span{
   font-size: 1rem;
 }
 
+input{
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid #1C1C1C;
+  padding: 5px;
+}
+
+input:focus{
+  outline: 1px solid #1C1C1C;
+  border: none;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .stroke{
   font-weight: bold;
   color: var(--principal-color);
@@ -77,4 +95,20 @@ span{
 .active{
   background-color: var(--principal-color);
   width: 100%;
+}
+
+.activeIconBtn{
+  color: #DC9757;
+}
+
+.error-text{
+  color: var(--error-color);
+}
+
+.error{
+  border-color: var(--error-color);
+}
+
+.error:focus{
+  outline-color: var(--error-color);
 }

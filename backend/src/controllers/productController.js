@@ -12,6 +12,20 @@ class ProductController{
         }
     }
 
+    static async getProductById(req,res,next){
+        const {id} = req.params
+
+        try {
+            const product = await productModel.findById(id)
+            if(!product){
+                return res.status(400).json({message: "Produto não existe", status: 400}) 
+            }
+            return res.status(200).json({message: product, status: 200})
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async getMyProducts(token, req, res, next){
         // eslint-disable-next-line no-undef
         const decodeToken = decode(token, process.env.KEY_TOKEN)
@@ -32,16 +46,14 @@ class ProductController{
         }
     }
 
-    static async createNewProduct(token, req, res, next){
+    static async createNewProduct(userId, req, res, next){
         const {title, price, describe, stoque} = req.body
         const filesNames = []
+
         for(let i in req.files){
             filesNames.push(req.files[i].filename)
         }
 
-        // eslint-disable-next-line no-undef
-        const decodeToken = decode(token, process.env.KEY_TOKEN)
-        const userId = decodeToken.id
         try {
             //eslint-disable-next-line no-undef
             const newProduct = await productModel.create({
@@ -55,43 +67,30 @@ class ProductController{
     
             await userModel.findByIdAndUpdate(userId, {products: newProducts})
 
-            return res.status(200).json({message: filesNames, status: 200})
+            return res.status(200).json({message: "Produto registrado com sucesso", status: 200})
         } catch (error) {
             next(error)
         }
     }
-    static async updateProduct(req, res, next){
-        const update = req.body
+    static async updateProduct(userId, req, res, next){
         const {id} = req.params
+        const update = req.body
+
         try {
-            await productModel.findOneAndUpdate({_id: id}, update)
+            await productModel.findByIdAndUpdate({_id: id}, update)
             return res.status(200).json({message: "Produto atualizado com sucesso!", status: 200})
         } catch (error) {
             next(error)
         }
     }
 
-    static async deleteProduct(token, req,res,next){
+    static async deleteProduct(userId, req,res,next){
         const {id} = req.params
         // eslint-disable-next-line no-undef
-        const decodeToken = decode(token, process.env.KEY_TOKEN)
-
         try {
+            console.log(id)
             await productModel.findByIdAndDelete(id)
-            const userProducts = await userModel.findById(decodeToken.id, ["products"])
-            const listProductsUser = [...userProducts.products]
-            
-            const updateListProducts = []
-            
-            listProductsUser.map(i => {
-                if(i !== id){
-                    updateListProducts.push(i)
-                }
-            })
-
-            await userModel.findByIdAndUpdate(decodeToken.id, {products: updateListProducts})
-
-            return res.status(200).json({message: "Produto removido com sucesso", status: 200})
+            next(userId)
         } catch (error) {
             next(error)   
         }

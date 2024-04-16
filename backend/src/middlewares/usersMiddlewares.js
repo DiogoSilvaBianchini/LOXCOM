@@ -16,24 +16,19 @@ const verifyToken = (req,res,next) => {
     try {
         const token = req.headers.token
         //eslint-disable-next-line no-undef
-        jwt.verify(token, process.env.KEY_TOKEN)
-        next(token)
+        const userId = jwt.verify(token, process.env.KEY_TOKEN).id
+        next(userId)
     } catch (error) {
         return res.status(401).json({message: "Token invalido", status: 401})
     }
 }
 
-const checkId = async (req, res, next) => {
-    const {token} = req.headers
+const checkId = async (id, req, res, next) => {
     try {
         // eslint-disable-next-line no-undef
-        const decodeToken = await jwt.decode(token, process.env.KEY_TOKEN)
-        const id = decodeToken.id
         const findEmail = await userModel.findById(id) 
-       
-        if(!findEmail) return res.status(401).json({message: "Token Inválido", status: 401})
-        
-        next(token)
+        if(!findEmail) return res.status(401).json({message: "Usuario não existe", status: 401})
+        next(id)
     } catch (error) {
         next(error)
     }

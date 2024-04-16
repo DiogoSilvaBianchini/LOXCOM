@@ -12,13 +12,7 @@ const Home = () => {
         {title: "Drone", price: 550.80, urlImg: "product1.png",category: "eletronics", avaliation: 4},
         {title: "Drone", price: 550.80, urlImg: "product1.png",category: "eletronics", avaliation: 4},
     ]
-    const product = async () => {
-        const req = await fetch("http://localhost:8082/products")
-        const res = await req.json()
-        console.log(res.message)
-    }
 
-    product()
     return(
         <main className="container">
             <div className='background'>

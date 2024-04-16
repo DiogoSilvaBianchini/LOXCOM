@@ -30,15 +30,15 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="icons">
-                <button>
+                <NavLink to="/login" className={({isActive}) => isActive ? "activeIconBtn":""}>
                     <PersonOutlineOutlinedIcon />
-                </button>
-                <button>
+                </NavLink>
+                <NavLink to="/cart" className={({isActive}) => isActive ? "activeIconBtn":""}>
                     <ShoppingCartOutlined />
-                </button>
-                <button>
+                </NavLink>
+                <NavLink to="/favority" className={({isActive}) => isActive ? "activeIconBtn":""}>
                     <FavoriteOutlinedIcon />
-                </button> 
+                </NavLink> 
                 </div>
             </div>
         </header>

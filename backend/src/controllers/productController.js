@@ -1,6 +1,7 @@
 import { decode } from "jsonwebtoken"
 import productModel from "../models/productSchema.js"
 import userModel from "../models/userSchema.js"
+import {removeFiles} from "../middlewares/productsMiddlewares.js" 
 
 class ProductController{
     static async getAllProducts(req,res,next){
@@ -26,6 +27,34 @@ class ProductController{
         }
     }
 
+    static async getListProducts(id, req, res, next){
+        try {
+            const user = await userModel.findById(id, ["products", "favorityProducts"])
+            const productsList = []
+            const userFavorityProducts = []
+            
+            if(user.products.length > 0){
+                for(let i of user.products){
+                    const findProducts = await productModel.findById(i)
+                    productsList.push(findProducts)
+                }
+            }
+
+            if(user.favorityProducts.length > 0){
+                for(let i of user.favorityProducts){
+                    if(i){
+                        const findProducts = await productModel.findById(i)
+                        userFavorityProducts.push(findProducts)
+                    }
+                }
+            }
+
+            return res.status(200).json({message: {registerProducts: productsList, favorityProducts: userFavorityProducts}, status: 200})
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async getMyProducts(token, req, res, next){
         // eslint-disable-next-line no-undef
         const decodeToken = decode(token, process.env.KEY_TOKEN)
@@ -46,18 +75,37 @@ class ProductController{
         }
     }
 
-    static async createNewProduct(userId, req, res, next){
-        const {title, price, describe, stoque} = req.body
-        const filesNames = []
+    static async uplaodTemp(userId, req, res, next){
+        let filesNames = []
+       try {
+            for(let i in req.files){
+                filesNames.push(req.files[i].filename)
+            }
 
-        for(let i in req.files){
-            filesNames.push(req.files[i].filename)
+            res.status(200).json({message: filesNames, status: 200})
+       } catch (error) {
+            next(error)
+       }
+    }
+
+    static async removeTempByName(userId, req, res, next){
+        const {imgs} = req.body
+        try {
+            removeFiles([imgs])
+            return res.status(201).json({message: "Imagem removida com sucesso", status: 201})
+        } catch (error) {
+            console.log(error)
+            next(error)
         }
+    }
 
+    static async createNewProduct(userId, req, res, next){
+        const {title, price, describe, imgs, category, stock} = req.body
+  
         try {
             //eslint-disable-next-line no-undef
             const newProduct = await productModel.create({
-                title, price, describe, owner: userId, stoque, imgs: filesNames
+                title, price, describe, owner: userId, category, stock, imgs
             })
 
             const idProduct = newProduct._id.toString()

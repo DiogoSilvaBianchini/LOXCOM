@@ -11,9 +11,9 @@ const Footer = () => {
                 <span><LocalPhoneIcon/> (15) 99751-6834</span>
                 <span><MailOutlineIcon/> diogosilvabianchini@gmail.com</span>
             </div>
-            <img src="./imgs/logo.svg" alt="logo LOXCOM" />
+            <img src="/imgs/logo.svg" alt="logo LOXCOM" />
             <div className="logo">
-                <img src="./imgs/logoDev.svg" alt="Logo do desenvolvedor Diogo Bianchini" />
+                <img src="/imgs/logoDev.svg" alt="Logo do desenvolvedor Diogo Bianchini" />
                 <span>Creted By Diogo Bianchini</span>
             </div>
         </footer>

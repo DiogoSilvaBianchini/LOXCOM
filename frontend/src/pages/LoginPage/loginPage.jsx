@@ -1,62 +1,57 @@
 import './style.css'
-import {GoogleLogin} from '@react-oauth/google'
-import {jwtDecode} from 'jwt-decode'
-import { useState } from 'react'
-import Lodding from '../../components/loding'
+import {Link, useNavigate} from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import {useAppContext} from '../../hooks/useAppContext'
+import Lodding from '../../components/loading/loading'
+import useFetch from '../../hooks/useFetch'
 
+
+// eslint-disable-next-line react/prop-types
 const LoginPage = () => {
-  const [err, setErr] = useState("")
-  const [load, setLoad] = useState(true)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const {setCookies, listFavorityIds} = useAppContext()
 
-  const handdleSubmit = (e) => {
+  
+  const navigate = useNavigate()
+  const { data: token, load, error, httpRequest } = useFetch("http://localhost:8082/user/login","POST")
+
+  const haddleSubmite = async (e) => {
     e.preventDefault()
-    setLoad(!load)
+     await httpRequest({email, password})
   }
-  const onSucessOAuth = async (usetToken) => {
-    const token = jwtDecode(usetToken.credential)
-    const userPayLoad = {email: token.email}
 
-    const auth = await fetch("http://localhost:8082/user/loginForGoogle", {
-      headers: {"Content-Type":"application/json"},
-      method: "POST",
-      body: JSON.stringify(userPayLoad)
-    }).then(res => res.json()).then(json => {
-      return json
-    })
-
-    if(auth.status == 401){
-      setErr(auth.message)
+  useEffect(() => {
+    if(token){
+      setCookies('token', token)
+      
+      fetch("http://localhost:8082/user/userById", {
+        headers: {"Content-Type":"application/json", token},
+        method: "GET"
+      }).then(res => res.json).then(user => listFavorityIds.push(user.favorityProducts))
+      
+      navigate("/perfil")
     }
-  }
+  },[token, navigate, setCookies, listFavorityIds])
 
   return (
     <div className="loginContainer">
-        <h2>Faça login</h2>
-        <form onSubmit={handdleSubmit}>
-           {
-            !load ? 
-            <>
-              <label htmlFor="">
-                  <span className={err && "error-text"}>E-mail</span>
-                  <input type="email" className={err && "error"}/>
-                  {err && <span className='small error-text'>{err}</span>}
-              </label>
-              <label htmlFor="">
-                  <span>Senha</span>
-                  <input type="password" />
-              </label>
-              
-            </>:
-            <>
-              <Lodding />
-            </>
-            
-           }
-           <button>Login</button>
+        <Link to={"/"}>
+          <img src="./imgs/logoDark.svg" alt="" />
+        </Link>
+        <h2>{!load ? "Faça login":"Aguarde"}</h2>
+        <form onSubmit={haddleSubmite}>
+          <label htmlFor="">
+                <span className={error && "error-text"}>E-mail</span>
+                <input type="email" disabled={!load ? false:true} value={email} onChange={e => setEmail(e.target.value)} className={error && "error"}/>
+                {error && <span className='small error-text'>{error}</span>}
+            </label>
+            <label htmlFor="">
+                <span className={error && "error-text"}>Senha</span>
+                <input className={error && "error"} type="password" disabled={!load ? false:true} value={password} onChange={e => setPassword(e.target.value)}/>
+            </label>
+           <button className={!load ? "btnLogin":"loadBtn"}>{!load ? "Login" : <Lodding color='#c1c1c1'/>}</button>
         </form>
-        <div className="auth">
-          <GoogleLogin onSuccess={credentials => onSucessOAuth(credentials)} onError={err => console.log(err)}/>
-        </div>
     </div>
   )
 }

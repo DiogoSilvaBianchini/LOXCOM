@@ -1,0 +1,157 @@
+.containerForm:nth-child(){
+    transition: .5s;
+}
+
+.containerRegister{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+.containerForm{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+}
+
+.containerForm form{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.containerForm form label{
+    width: 100%;
+}
+
+.containerForm form label span{
+    width: 100%;
+}
+
+.containerForm form .agree-btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+}
+
+.labelImage{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px dashed #0084ff;
+    padding: 10px 0px;
+}
+
+.containerForm .labelImage img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.containerForm .labelImage .contPictores{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerForm .labelImage .contPictores{
+    color: #c4c4c4;
+    font-size: 1rem;
+    transition: .4s;
+}
+
+.containerForm .labelImage .contPictores svg{
+    font-size: 4rem;
+}
+
+
+.containerForm .trocaImgs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.containerForm .trocaImgs button{
+    max-width: 50px;
+    max-height: 50px;
+    width: auto;
+    height: auto;
+}
+
+.cancel-select{
+    user-select: none;
+}
+
+.iconBtn svg{
+    padding: 5px;
+    color: var(--principal-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.iconBtn svg{
+    font-size: 40px
+}
+
+.rowButtons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 25px;
+}
+
+.icon-btn{
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.icon-btn svg{
+    color: #fff;
+    font-size: 1.8rem;
+}
+
+.icon-btn:nth-child(1){
+    background-color: var(--dark-color);
+}
+.icon-btn:nth-child(2){
+    background-color: var(--principal-color);
+}
+
+@keyframes not-not{
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+}
+
+.error{
+    border: 1px dashed rgb(219, 54, 54);
+    padding: 2px;
+    animation: not-not .5s linear;
+}
+
+.errorLabel{
+    border: 2px dashed rgb(219, 54, 54);
+    animation: not-not .5s linear;
+}

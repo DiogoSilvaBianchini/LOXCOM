@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import userModel from '../models/userSchema.js'
+import { removeFiles } from './productsMiddlewares.js'
 
 const createToken = async (id, req, res, next) => {
     try {
@@ -18,6 +19,24 @@ const verifyToken = (req,res,next) => {
         //eslint-disable-next-line no-undef
         const userId = jwt.verify(token, process.env.KEY_TOKEN).id
         next(userId)
+    } catch (error) {
+        if(req.file || req.files){
+            const filesNames = []
+            for(let file of req.files){
+                filesNames.push(file.filename)
+            }
+            removeFiles(filesNames, "temp")
+        }
+        return res.status(401).json({message: "Token invalido", status: 401})
+    }
+}
+
+const verifyIfLogin = (req,res,next) => {
+    try {
+        const token = req.headers.token
+        //eslint-disable-next-line no-undef
+        const userId = jwt.verify(token, process.env.KEY_TOKEN).id
+        return res.status(200).json({message: "Usuario logado", status: 200})
     } catch (error) {
         return res.status(401).json({message: "Token invalido", status: 401})
     }
@@ -49,5 +68,6 @@ export {
     createToken,
     encriptedPassword,
     verifyToken,
-    checkId
+    checkId,
+    verifyIfLogin
 }

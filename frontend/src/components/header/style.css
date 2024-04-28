@@ -6,6 +6,8 @@ header{
     justify-content: center;
     background-color: var(--dark-color);
     color: var(--white-color);
+
+    position: relative;
 }
 
 header .search-bar{
@@ -13,6 +15,15 @@ header .search-bar{
     width: 80%;
     justify-content: flex-end;
     gap: 5px;
+}
+
+header .search-bar .menuButton{
+    display: none;
+    color: #fff;
+    font-size: 2rem;
+}
+header .search-bar input{
+    border-radius: 5px;
 }
 
 header .row{
@@ -65,6 +76,7 @@ header .row input{
     width: 80%;
     padding: 5px;
     font-family: var(--principal-font);
+    background-color: #fff;
 }
 
 header .row input:focus{
@@ -74,4 +86,38 @@ header .row input:focus{
 header .row .icons button{
     background-color: transparent;
     color: var(--white-color);
+}
+
+@media(max-width: 800px){
+    .logo{
+        display: none;
+    }
+
+    header .row{
+        width: 100%;
+        padding: 20px 0px;
+    }
+
+    header .search-bar{
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin: 0 auto;
+    }
+
+    .search-bar input{
+        width: 80%;
+    }
+
+    .search-bar button{
+        display: none;
+    }
+    header .links{
+        display: none;
+    }
+    header .search-bar .menuButton{
+        display: block;
+    }
 }

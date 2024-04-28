@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root{
-  --dark-color: #1C1C1C;
+  --dark-color: #333;
   --white-color: #FFFFFF;
   --gray-color: #C4C4C4;
   --principal-color: #DC9757;
+  --agree-color: #00a560;
   --principal-font: 'Inter', sans-serif;
   --error-color: #dd0000;
 }
@@ -17,6 +18,8 @@
 body{
   width: 100%;
   box-sizing: border-box;
+  background-color: #eaeaea;
+  position: relative;
 }
 
 ul, li{
@@ -58,11 +61,31 @@ input{
   border: none;
   border-bottom: 1px solid #1C1C1C;
   padding: 5px;
+  transition: .2s;
+  background-color: transparent;
 }
 
 input:focus{
-  outline: 1px solid #1C1C1C;
-  border: none;
+  outline: none;
+  border-color: #0087e0;
+}
+
+.largeInput{
+  width: 95%;
+  height: 100px;
+  max-width: 100%;
+  max-height: 100px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  text-align: start;
+  word-break: break-all;
+  font-family: var(--principal-font);
+  padding: 5px;
+}
+
+.largeInput:focus{
+  outline: 1px solid var(--principal-color);
+  border: 1px solid transparent;
 }
 
 label{
@@ -71,6 +94,12 @@ label{
   align-items: flex-start;
 }
 
+p{
+  font-family: var(--principal-font);
+  font-size: 1rem;
+  text-align: justify;
+  line-height: 1.4em;
+}
 .stroke{
   font-weight: bold;
   color: var(--principal-color);
@@ -84,6 +113,18 @@ label{
   font-weight: 400;
   font-size: 1rem;
   border-radius: 3px;
+  transition: .5s;
+}
+
+.agree-btn:hover{
+  background-color: #cf843d;
+}
+
+.iconBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
 .row{
@@ -101,6 +142,10 @@ label{
   color: #DC9757;
 }
 
+.iconBtn.activeIconBtn span, .iconBtn.activeIconBtn svg{
+  color: #DC9757;
+}
+
 .error-text{
   color: var(--error-color);
 }
@@ -111,4 +156,29 @@ label{
 
 .error:focus{
   outline-color: var(--error-color);
+}
+
+.buy-Btn{
+  width: 80%;
+  background-color: var(--dark-color);
+  color: var(--white-color);;
+  font-size: 1rem;
+  font-family: var(--principal-font);
+  font-weight: 600;
+  border: 2px solid var(--dark-color);
+  border-radius: 5px;
+  padding: 5px 15px;
+  transition: .2s;
+}
+
+.buy-Btn:hover{
+  background-color: var(--principal-color);
+  color: var(--white-color);
+  border-color: transparent;
+}
+
+@media (max-width: 800px) {
+  .buy-Btn{
+    font-size: 12px;
+  }
 }

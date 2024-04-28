@@ -39,7 +39,7 @@ app.use((error,req,res,next) => {
         if(error.message.includes("Cannot set headers")){
             return res.status(400).json({message: "Erro não encontrado"})
         }
-    
+        
         return res.status(500).json({message: "Erro interno do servidor"})
     } catch (error) {
         return res.status(500).json({message: "Erro interno do servidor"})

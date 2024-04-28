@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + uniqueSuffix)
     },
 })
+
 const fileFilter = (req, file, cb) => {
     const isAccepted = ['image/png', 'image/jpg', 'image/jpeg'].find( formatImage => formatImage == file.mimetype)
     if(isAccepted){
@@ -20,6 +21,18 @@ const fileFilter = (req, file, cb) => {
     }
     return cb(null, false)
 }
+
+const tempStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "../frontend/public/productsImages")
+    },
+    filename: (req, file, cb) => {
+        
+        const fileNameOrigim = file.originalname.split(".")
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + '.' + fileNameOrigim[1]
+        cb(null, file.fieldname + uniqueSuffix)
+    }
+})
 
 const removeImages = async (userId, req, res, next) => {
     const {id} = req.params
@@ -30,7 +43,7 @@ const removeImages = async (userId, req, res, next) => {
             next(userId)
         }else{
             const imgList = findProduct.imgs
-            removeFiles(imgList)
+            removeFiles(`productsImgs/${imgList}`)
             return next(userId)
         }
         
@@ -42,13 +55,12 @@ const removeImages = async (userId, req, res, next) => {
 const removeFiles = (files) => {
     try {
         for(let file of files){
-            unlink(`../frontend/public/productsImgs/${file}`, (err) => {
-                if(err) return err
+            unlink(`../frontend/public/productsImages/${file}`, (err) => {
+                if(err) return console.log(err)
             })
         }
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }
@@ -108,10 +120,12 @@ const removeAllProductsForUse = async (userId) => {
 }
 
 export {
-    storage, 
+    storage,
+    tempStorage,
     fileFilter, 
     removeImages, 
     removeRegisterProductUser, 
     deleteAllProductsForUser, 
-    removeAllProductsForUse
+    removeAllProductsForUse,
+    removeFiles
 }

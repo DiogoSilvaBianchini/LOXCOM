@@ -1,46 +1,63 @@
 .card{
+    width: 25%;
+    max-width: 240px;
+    min-width: 180px;
+    height: 325px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 15px 0px;
+}
+
+.card .containerImage{
+    width: 100%;
+    height: 40%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 15px;
-    background-color: var(--white-color);
-    font-family: var(--principal-font);
+    margin-top: 15px;
 }
 
-.card img{
-    width: 250px;
-    height: 200px;
+.card .containerImage img{
+    max-width: 90%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
 }
 
-.card span{
-    color: #c4c4c4;
-}
-
-.card .column{
-    width: 100%;
+.card .contentCard{
+    width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 25px;
 }
 
-.card .row{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.card .contentCard h3{
+    font-size: 1.2rem;
 }
 
-.card button{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 60px;
+.card .contentCard .title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
-.card .row svg{
-    color: orange;
+.card .contentCard .smallText{
+    font-size: .9rem;
+    color: var(--agree-color);
+}
+
+@media(max-width: 900px){
+    .card .contentCard h3{
+        font-size: 1rem;
+    }
+
+    .card .contentCard .smallText{
+        font-size: .7rem;
+    }
 }

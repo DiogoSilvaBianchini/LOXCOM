@@ -17,7 +17,7 @@ const productSchema = new Schema({
         ref: "Users"
     },
     category: {
-        type: Array,
+        type: String,
         required: [true, "A Categoria é obrigatorio"]
     },
     imgs: {

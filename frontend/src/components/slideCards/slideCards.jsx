@@ -1,15 +1,15 @@
 import './style.css'
-import Card from '../card'
+import Card from '../card/card.jsx'
 // eslint-disable-next-line react/prop-types
 const SlideCards = ({title, cardDescribe = [], max}) => {
     
     const renderProducts = () => {
         let products = []
         for(let i = 0; i < max; i++){
-            
            products.push(
                 <Card key={i} 
-                    img={`/imgs/${cardDescribe[i].urlImg}`} 
+                    productId={cardDescribe[i]._id}
+                    img={`${cardDescribe[i].imgs[0]}`} 
                     title={cardDescribe[i].title} 
                     price={cardDescribe[i].price} 
                     category={cardDescribe[i].category} 
@@ -25,7 +25,7 @@ const SlideCards = ({title, cardDescribe = [], max}) => {
             <h2>{title}</h2>
             <div className="products">
             {
-                renderProducts()
+                cardDescribe && renderProducts()
             }
             </div>
         </section>

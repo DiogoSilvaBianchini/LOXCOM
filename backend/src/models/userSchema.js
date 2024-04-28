@@ -18,6 +18,10 @@ const userSchema = new Schema({
         type: String,
         required: [true, "CEP não reconhecido"]
     },
+    userImg: {
+        type: String,
+        default: "img-default.png"
+    },
     office: {
         type: String,
         required: [true, "O nivel de autorização deve ser setado."],
@@ -27,6 +31,10 @@ const userSchema = new Schema({
         } 
     },
     products: {
+        type: Array,
+        default: []
+    },
+    favorityProducts: {
         type: Array,
         default: []
     }

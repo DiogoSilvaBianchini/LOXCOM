@@ -2,8 +2,25 @@ import { decode } from "jsonwebtoken"
 import productModel from "../models/productSchema.js"
 import userModel from "../models/userSchema.js"
 import {removeFiles} from "../middlewares/productsMiddlewares.js" 
+import { findProductsFromList } from "../utils/findProductsFromList.js"
 
 class ProductController{
+    static async getListProductsById(userId, req, res, next){
+        try {
+            const findProductsUser = await userModel.findById({_id: userId}, ["favorityProducts", "products"])
+            
+            const productsId = findProductsUser.products
+            const favProductsId = findProductsUser.favorityProducts
+
+            const product = await findProductsFromList(productsId)
+            const favProduct = await findProductsFromList(favProductsId)
+
+            return res.status(200).json({message: {products: product, favProducts: favProduct}, status: 200})
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async getAllProducts(req,res,next){
         try {
             const getAllProducts = await productModel.find({}).populate("owner", ["name", "email"])
@@ -94,7 +111,6 @@ class ProductController{
             removeFiles([imgs])
             return res.status(201).json({message: "Imagem removida com sucesso", status: 201})
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }
@@ -136,7 +152,6 @@ class ProductController{
         const {id} = req.params
         // eslint-disable-next-line no-undef
         try {
-            console.log(id)
             await productModel.findByIdAndDelete(id)
             next(userId)
         } catch (error) {

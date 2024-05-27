@@ -1,6 +1,8 @@
 import userModel from '../models/userSchema.js'
 import bcrypt from 'bcryptjs'
 import {deleteAllProductsForUser, removeAllProductsForUse} from '../middlewares/productsMiddlewares.js'
+import {MercadoPagoConfig, Payment} from 'mercadopago'
+
 
 class UserControllers{
     static async loginForGoogle(req,res,next){
@@ -78,23 +80,14 @@ class UserControllers{
     }
 
     static async addFavorityProduct(userId, req, res, next){
-        const {idProduct} = req.body
         try {
-            let updateList = []
-            const listFavProducts = await userModel.findById({_id: userId}, ["favorityProducts"])
-            const actualList = listFavProducts.favorityProducts
-            if(!listFavProducts) return res.status(401).json({message: "Usuario não encontrado", status: 401})
-            
-            for(let i = 0; i <= actualList.length; i++){
-                updateList.push(actualList[i])
-            }
-            
-            updateList.push(idProduct)
-            console.log(updateList)
-            await userModel.findByIdAndUpdate({_id: userId}, {favorityProducts: updateList})
-            return res.status(201).json({message: "Dados atualizados com sucesso", status: 201})
+            const {id} = req.params
+            const findUser = await userModel.findById({_id: userId})
+            const listFav = [...findUser.favorityProducts, id]
+            await userModel.findByIdAndUpdate({_id: userId}, {favorityProducts: listFav })
+            return res.status(201).json({message: "Item adicionado", status: 201})
         } catch (error) {
-            next(error)
+            return next(error)
         }
     }
 
@@ -107,6 +100,36 @@ class UserControllers{
         } catch (error) {
             next(error)   
         }
+    }
+
+    static async searchPayment(req,res,next){  
+        const client = new MercadoPagoConfig({accessToken: process.env.KEY_TOKEN,})
+        const payment = new Payment(client)
+
+        payment.search({options: {
+            external_reference: "MP0001",
+            sort: "date_created",
+            criteria: "asc",
+            range: "date_created",
+            begin_date: "NOW-30DAYS",
+            end_date: "NOW"
+        }}).then(results => {
+            return res.status(200).json({results})
+        }).catch(err => {
+            next(err)
+        })
+
+    }
+
+    static async payment(body, req, res, next){   
+        const client = new MercadoPagoConfig({accessToken: process.env.KEY_TOKEN})
+        const payment = new Payment(client)
+        
+        payment.create({body}).then(results => {
+            return res.status(200).json({results})
+        }).catch(err => {
+            res.status(500).json({message: err})
+        })      
     }
 }
 

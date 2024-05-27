@@ -30,6 +30,16 @@ const userSchema = new Schema({
             message: "Nivel de autorização {VALUE} não é invalido!"
         } 
     },
+    phone: {
+        type: String,
+        required: [true, "Numero de telefone obrigatorio"],
+        default: "15997516834"
+    },
+    streetNumber: {
+        type: Number,
+        required: [true, "Numero da Casa é obrigatorio"],
+        default: "95"
+    },
     products: {
         type: Array,
         default: []

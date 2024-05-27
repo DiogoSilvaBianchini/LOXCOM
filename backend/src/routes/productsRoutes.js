@@ -10,6 +10,7 @@ const tempUplaod = multer({storage: tempStorage})
 const routes = express.Router()
 
 routes.get("/products", ProductController.getAllProducts)
+routes.get("/products/listProducts", verifyToken, ProductController.getListProductsById)
 routes.get("/products/myProducts", verifyToken, checkId, ProductController.getMyProducts)
 routes.get("/products/getAllProductUser", verifyToken, checkId, ProductController.getListProducts)
 routes.get("/products/:id", ProductController.getProductById)

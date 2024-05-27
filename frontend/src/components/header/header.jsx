@@ -1,18 +1,30 @@
 import './style.css'
-import {NavLink, Link} from 'react-router-dom'
-import { useAppContext } from '../../hooks/useAppContext';
+import {NavLink, Link, useLocation, useNavigate} from 'react-router-dom'
 import AsideMenu from '../asideMenu/asideMenu'
 
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
-
-
+import { useEffect, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux'
+import {setFormState} from '../../redux/perfilFormStateSlice'
 const Header = () => {
-    const { cookie } = useAppContext()
     const [menu, setMenu] = useState(true)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {formState} = useSelector(state => state.perfilState)
+
+    useEffect(() => {
+        localStorage.setItem("back_path", location.pathname)
+    }, [location])
+    
+    const perfilRedirect = (stage) => {
+        dispatch(setFormState({stage}))
+        navigate("/perfil")
+    }
+
     return (
         <header>
             <div className="row">
@@ -39,15 +51,15 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="icons">
-                    <NavLink to={!cookie ? "/login":"/perfil"} className={({isActive}) => isActive ? "activeIconBtn":""}>
+                    <button onClick={() => perfilRedirect(0)} className={location.pathname === "/perfil" && formState === 0 ? "activeIconBtn" : ""}>
                         <PersonOutlineOutlinedIcon />
-                    </NavLink>
-                    <NavLink to="/cart" className={({isActive}) => isActive ? "activeIconBtn":""}>
+                    </button>
+                    <button onClick={() => perfilRedirect(1)} className={location.pathname === "/perfil" && formState === 1 ? "activeIconBtn" : ""}>
                         <ShoppingCartOutlined />
-                    </NavLink>
-                    <NavLink to="/favority" className={({isActive}) => isActive ? "activeIconBtn":""}>
+                    </button>
+                    <button onClick={() => perfilRedirect(2)} className={location.pathname === "/perfil" && formState === 2 ? "activeIconBtn" : ""}>
                         <FavoriteOutlinedIcon />
-                    </NavLink> 
+                    </button> 
                 </div>
             </div>
             <AsideMenu active={menu} setActive={setMenu}/>

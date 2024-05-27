@@ -1,9 +1,22 @@
-.containerProducts{
+.containerProductsPage{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.containerProduct h2{
+    font-size: min(5vw, 1.4rem);
+}
+
+.containerProduct input{
+    border: none;
+    color: #1c1c1c;
+}
+
+.containerProduct input:focus{
+    outline: none;
 }
 
 .containerProduct{
@@ -14,17 +27,17 @@
     justify-content: center;
     background-color: #fff;
     gap: 25px;
-    padding-bottom: 100px;
 }
 
 .showRoomProducts{
-    width: 80%;
+    width: 90%;
     height: 400px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 15px;
-    margin-top: 25px;
+    gap: 25px;
+    margin-top: 75px;
+    margin-bottom: 50px;
     padding: 15px;
 }
 
@@ -33,32 +46,30 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 5px;
+    gap: 25px;
     height: 100%;
 }
 
 .prototypeImage button{
-    width: 80px;
+    width: 60px;
+    background-color: transparent;
+    border: none;
 }
 
-.mobileButtonsImg button{
-    width: 50px;
+.prototypeImage img, .imageProduct img{
+    border: 2px solid transparent;
+    padding: 5px;
 }
 
-.mobileButtonsImg{
-    width: 100%;
-    display: none;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
+.prototypeImage .activeButton, .imageProduct .activeButton{
+    border: 2px solid var(--principal-color);
+    padding: 5px;
+    transition: .5s;
 }
 
-.mobileButtonsImg button img{
-    width: 100%;
-}
 
 .imageProduct{
-    max-width: 80%;
+    width: 100%;
     height: 100%;
     background-color: #fff;
     display: flex;
@@ -67,14 +78,15 @@
     justify-content: flex-start;
 }
 
-.imageProduct img{
+.imageProduct .principalImage{
+    width: auto;
     max-width: 600px;
     max-height: 100%;
-    margin: 0 auto;
 }
 
 .content{
-    width: 250px;
+    width: 50%;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -84,7 +96,7 @@
     gap: 40px;
 }
 
-.content .price span{
+.price span{
     color: var(--agree-color);
 }
 
@@ -105,6 +117,7 @@
 }
 
 .titleAvaliation .rowDescribe svg{
+    font-size: 1.2rem;
     color: var(--principal-color);
 }
 
@@ -118,14 +131,50 @@
     font-size: 1rem;
 }
 
-.content .buttons button{
+.content .row{
     width: 100%;
+    gap: 15px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row wrap;
 }
 
-.content .buttons button:nth-child(2){
+.circle-btn{
+    display: block;
+    width: auto;
+    padding: 10px;
+    background-color: var(--dark-color);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: .3s;
+}
+
+.circle-btn:hover{
     background-color: transparent;
+    border-color:  var(--dark-color);
+    color: var(--dark-color);
+}
+
+.content .agree-btn{
+    width: auto;
+    font-size: 1rem;
+    padding: 13px;
+    font-weight: 600;
+    border: 1px solid var(--principal-color);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.content .agree-btn:hover{
+    background-color: transparent;
+    border-color: var(--principal-color);
     color: var(--principal-color);
-    border: 2px solid var(--principal-color);
 }
 
 .stock{
@@ -138,6 +187,10 @@
 .stock input{
     width: 2rem;
     text-align: center;
+    border: none;
+    border-bottom: 1px solid var(--dark-color);
+    padding: 8px 0px;
+    padding-bottom: 4px;
 }
 
 .describe{
@@ -149,40 +202,61 @@
     gap: 15px;
 }
 
+.mobileButtonsImg, .mobile{
+    display: none;
+}
 
-@media(max-width: 800px){
+@media(max-width: 1200px){
     .showRoomProducts{
         width: 80%;
         gap: 15px;
         justify-content: center;
+        flex-wrap: wrap;
+        height: auto;
     }
-    .imageProduct img{
-        max-width: 200px;
+    .imageProduct .principalImage{
+        max-width: 600px;
         width: 100%;
     }
 
     .content{
-        width: 40%;
-    }
-
-    .content h2{
-        font-size: 1rem;
-    }
-
-    .content svg, .content span{
-        font-size: .9rem;
-    }
-
-    .content button{
-        width: 100%;
-        font-size: 9px;
+        display: none;
     }
 
     .prototypeImage{
         display: none;
     }
 
-    .mobileButtonsImg{
+    .mobile{
+        width: 100%;
         display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .mobile button{
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .mobileButtonsImg button{
+        width: 100%;
+        max-width: 40px;
+        margin-bottom: 50px;
+        background-color: transparent;
+        border: none;
+    }
+    
+    .mobileButtonsImg{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 26px;
+    }
+    
+    .mobileButtonsImg button img{
+        width: 100%;
     }
 }

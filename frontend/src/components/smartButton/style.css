@@ -1,0 +1,10 @@
+.btn{
+    padding: 10px 15px;
+    font-family: var(--principal-font);
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 2px solid #1c1c1c;
+    cursor: pointer;
+    transition: .3s;
+}

@@ -94,7 +94,6 @@ const RegisterPage = () => {
             })
 
             const res = await req.json()
-            console.log(res)
             if(res.status === 401){
                 navigate("/login")
             }else{

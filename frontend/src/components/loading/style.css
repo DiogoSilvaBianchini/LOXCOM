@@ -1,12 +1,15 @@
-@keyframes rotate{
+
+.loading{
+    animation: loading .5s linear infinite;
+    width: 48px;
+    height: 48px;
+}
+
+@keyframes loading{
     0%{
         transform: rotate(0deg);
     }
     100%{
         transform: rotate(360deg);
     }
-}
-
-#lodding{
-    animation: rotate .8s infinite linear;
 }

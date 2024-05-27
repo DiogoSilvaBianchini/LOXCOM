@@ -1,0 +1,109 @@
+.registerForm{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    margin: 0 auto;
+    transition: .5s;
+    position: relative;
+    padding: 15px 0px;
+}
+
+.registerForm h2{
+    margin-top: 50px;
+}
+
+.registerForm form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.registerForm form .formContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.registerForm .row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+@keyframes moveDown{
+    0%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes dropDown{
+    0%{
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes opacity{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.moveDown{
+    animation: moveDown .3s linear forwards;
+    z-index: 0;
+}
+
+.dropDown{
+    animation: dropDown .3s linear forwards;
+    z-index: 0;
+}
+
+.opacity{
+    animation: opacity .6s linear forwards;
+}
+
+@media(max-width: 800px){
+    .registerForm{
+        width: 100%;
+        padding: 15px;
+    }
+
+    form{
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .registerForm form .row{
+        gap: 25px;
+    }
+}
+
+@media(max-width: 600px){
+    .registerForm{
+        padding: 0px;
+    }
+}

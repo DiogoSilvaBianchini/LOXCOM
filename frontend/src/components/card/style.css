@@ -27,6 +27,11 @@
     height: auto;
 }
 
+.containerImage svg{
+    font-size: 3rem;
+    color: #c4c4c4;
+}
+
 .card .contentCard{
     width: 90%;
     display: flex;

@@ -5,34 +5,39 @@ const useFetch = (url, method, token) => {
     const [load, setload] = useState(false)
     const [status, setStatus] = useState(false)
     const [error, setError] = useState(null)
+    const backEndUrl = import.meta.env.VITE_SERVER_URL + url || url
 
     useEffect(() => {
         const httpRequest = async () => {
-            setload(true)
-            const request = await fetch(url, {
-                headers: {"Content-Type":"application/json", token},
-                method
-            })
+            try {
+                setload(true)
+                const request = await fetch(backEndUrl, {
+                    headers: {"Content-Type":"application/json", token},
+                    method
+                })
 
-            const response = await request.json()
-            setStatus(response.status)
-            if(response.status !== 200){
-                setError(response.message)
-            }else{
-                setData(response.message)
+                const response = await request.json()
+                setStatus(response.status)
+                if(response.status !== 200){
+                    setError(response.message)
+                }else{
+                    setData(response.message)
+                }
+                setload(false)
+            } catch (error) {
+                setError(error.message)
             }
-            setload(false)
         }
 
         if(method === "GET"){
             httpRequest()
         }
-    },[url, method, token])
+    },[backEndUrl, method, token])
 
     const httpRequest = async (body) => {
         setload(true)
         
-        const request = await fetch(url, {
+        const request = await fetch(backEndUrl, {
             headers: {"Content-Type":"application/json", token},
             method,
             body: JSON.stringify(body)

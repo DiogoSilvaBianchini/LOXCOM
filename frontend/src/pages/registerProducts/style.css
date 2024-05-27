@@ -136,22 +136,11 @@
     background-color: var(--principal-color);
 }
 
-@keyframes not-not{
-    0%{
-        transform: translateY(0px);
-    }
-    50%{
-        transform: translateY(10px);
-    }
-}
-
 .error{
     border: 1px dashed rgb(219, 54, 54);
     padding: 2px;
-    animation: not-not .5s linear;
 }
 
 .errorLabel{
     border: 2px dashed rgb(219, 54, 54);
-    animation: not-not .5s linear;
 }

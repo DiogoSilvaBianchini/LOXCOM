@@ -1,0 +1,98 @@
+
+.asideCard{
+    width: 60%;
+    max-width: 300px;
+    background-image: url('imgs/textureBackground.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 50px;
+    z-index: 1000;
+    padding: 10px 0px;
+}
+
+.asideCard .logoCard{
+    width: 150px;
+    margin-top: 25px;
+}
+
+.asideCard .column{
+    text-align: center;
+}
+
+.asideCard .column h2{
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.asideCard .column span{
+    font-size: 1rem;
+    font-weight: 300;
+    color: #fff;
+    font-family: var(--principal-font);
+}
+
+.asideCard .vectorCard{
+    width: auto;
+    height: auto;
+    max-width: 70%;
+    max-height: 70%;
+}
+
+@keyframes moveLeft{
+    0%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(-180px);
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes openRight{
+    0%{
+        transform: translateX(180px);
+        opacity: 0;
+    }
+    100%{
+        transform: translate(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes openLeft{
+    0%{
+        transform: translateX(-180px);
+        opacity: 0;
+    }
+    100%{
+        transform: translate(0px);
+        opacity: 1;
+    }
+}
+
+.openRight{
+    animation: openRight .2s linear forwards;
+}
+
+.openLeft{
+    animation: openLeft .3s linear forwards;
+}
+
+.outCardAnimation{
+    animation: moveLeft .2s linear forwards;
+}
+
+
+@media(max-width: 800px){
+    .asideCard{
+        display: none;
+    }
+}

@@ -1,0 +1,27 @@
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+form input, 
+#form-checkout__cardNumber, 
+#form-checkout__expirationDate,
+#form-checkout__securityCode{
+    width: 100%;
+    padding: 5px;
+    height: 1.5rem;
+    border: none;
+    box-shadow: 1px 1px 5px #33333354;
+}
+
+form select{
+    width: 100%;
+    padding: 5px 8px;
+    margin: 0px;
+    border: none;
+    box-shadow: 1px 1px 5px #33333354;
+}

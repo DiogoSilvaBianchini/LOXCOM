@@ -1,0 +1,20 @@
+.circleButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    padding: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.asideContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asideContainer .row svg{
+    font-size: 1rem;
+}

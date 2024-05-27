@@ -2,7 +2,6 @@ import './style.css'
 import Card from '../card/card.jsx'
 // eslint-disable-next-line react/prop-types
 const SlideCards = ({title, cardDescribe = [], max}) => {
-    
     const renderProducts = () => {
         let products = []
         for(let i = 0; i < max; i++){

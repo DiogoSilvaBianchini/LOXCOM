@@ -10,6 +10,15 @@
   --error-color: #dd0000;
 }
 
+#root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 90vw;
+  min-height: 100vh;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -35,12 +44,6 @@ img{
   max-width: 100%;
 }
 
-button{
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
 h2{
   font-family: var(--principal-font);
   color: #444444;
@@ -54,20 +57,6 @@ h3{
 span{
   font-family: var(--principal-font);
   font-size: 1rem;
-}
-
-input{
-  font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid #1C1C1C;
-  padding: 5px;
-  transition: .2s;
-  background-color: transparent;
-}
-
-input:focus{
-  outline: none;
-  border-color: #0087e0;
 }
 
 .largeInput{
@@ -88,12 +77,6 @@ input:focus{
   border: 1px solid transparent;
 }
 
-label{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 p{
   font-family: var(--principal-font);
   font-size: 1rem;
@@ -112,6 +95,7 @@ p{
   font-family: var(--principal-font);
   font-weight: 400;
   font-size: 1rem;
+  border: none;
   border-radius: 3px;
   transition: .5s;
 }
@@ -181,4 +165,28 @@ p{
   .buy-Btn{
     font-size: 12px;
   }
+}
+
+
+.darkButton{
+  background-color: #1c1c1c;
+  color: #fff;
+  border-color: transparent;
+}
+
+.darkButton:hover{
+  background-color: #2f2f2f;
+  border-radius: 10px;
+}
+
+.outtlineButton{
+  background-color: transparent;
+  color: #1c1c1c;
+  border-color: #1c1c1c;
+}
+
+.outtlineButton:hover{
+  border-color: #555;
+  color: #555;
+  border-radius: 10px;
 }

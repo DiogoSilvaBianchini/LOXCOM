@@ -1,17 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/formatPrice.js'
 import './style.css'
-import { memo } from 'react';
-
+import { memo, useState } from 'react';
+import ImageIcon from '@mui/icons-material/Image';
 
 // eslint-disable-next-line react/prop-types
 const Card = memo(function Card({productId, img, title, price}){
     const navigate = useNavigate()    
-
+    const [load, setLoad] = useState(false)
+    
     return (
         <div className='card'>
             <div className='containerImage'>
-                <img src={`/productsImages/${img}`} alt="imagem do produto" />
+                {!load && <ImageIcon />}
+                <img className={load ? "":"block"} src={`productsImages/${img}`} onLoad={() => setLoad(true)} alt="imagem do produto" />
             </div>
             <div className="contentCard">
                 <span className='title'>{title}</span>

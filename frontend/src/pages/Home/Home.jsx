@@ -8,8 +8,7 @@ import { useAppContext } from '../../hooks/useAppContext.jsx'
 
 const Home = () => {
     const {cookie} = useAppContext()
-    const {data} = useFetch("http://localhost:8082/products", "GET", cookie.token)
-    console.log(data)
+    const {data} = useFetch("/products", "GET", cookie.token)
     return(
         <>
             {

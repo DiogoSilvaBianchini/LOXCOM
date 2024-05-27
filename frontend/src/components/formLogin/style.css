@@ -1,0 +1,49 @@
+.formSpace{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.formSpace h2{
+    font-size: 1.8rem;
+}
+
+.formSpace form{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.formSpace form .simpleInput{
+    width: 90%;
+}
+
+.formContainer form button{
+    width: 80%;
+}
+
+.block{
+    display: none;
+}
+
+@keyframes moveDown{
+    0%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(100px);
+        display: none;
+        opacity: 0;
+    }
+}
+
+.outFormAnimation{
+    animation: moveDown .2s linear forwards;
+}

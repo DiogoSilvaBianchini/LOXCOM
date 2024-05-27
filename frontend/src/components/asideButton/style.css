@@ -1,0 +1,11 @@
+.asideButtonContainer{
+    width: 90%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.asideButtonContainer svg{
+    font-size: 1rem;
+}

@@ -1,0 +1,66 @@
+.simpleInput{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+}
+
+.simpleInput span{
+    font-size: var(--principal-font);
+    font-size: 1rem;
+    font-weight: 400;
+    color: #c1c1c1;
+    transition: .2s;
+}
+
+.simpleInput input{
+    border: 2px solid #c1c1c1;
+    box-shadow: none;
+    border-radius: 4px;
+    transition: .2s;
+    color: #c1c1c1;
+    padding: 5px 0px;
+    padding-left: 5px;
+    transition: .2s;
+}
+
+.simpleInput input::placeholder{
+    color: #c1c1c1;
+}
+
+.simpleInput input:focus{
+    outline: none;
+    border-color: #1c1c1c;
+    color: #1c1c1c;
+}
+
+.simpleInput .activeInput{
+    color: #1c1c1c;
+}
+
+.simpleInput input.activeInput{
+    border-color: #666;
+}
+
+.simpleInput .checked{
+    border-color: #08ac6d;
+    color: #08ac6d;
+}
+
+.simpleInput .error{
+    border-color: #bb2020;
+    color: #bb2020;
+}
+
+.simpleInput .errorText{
+    font-size: .7rem;
+    max-width: 100%;
+    color: #bb2020;
+}
+
+input.blocked{
+    border-color: #c4c4c4 !important; 
+    color: #c4c4c4 !important;
+    cursor: not-allowed;
+}

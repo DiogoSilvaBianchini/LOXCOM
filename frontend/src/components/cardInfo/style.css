@@ -1,0 +1,91 @@
+.cardInfoContainer{
+    width: 100%;
+    padding: 15px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    gap: 25px;
+    background-color: #fff;
+}
+
+.perfilContainer{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.cardInfoContainer .row{
+    width: 100%;
+    gap: 15px;
+    position: relative;
+}
+
+.cardInfoContainer .row button{
+    padding: 8px;
+    color: #fff;
+    background-color: #c4c4c4;
+    gap: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    transition: .3s;
+    z-index: 100;
+}
+
+.cardInfoContainer .row .buttons{
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -10px;
+}
+
+.cardInfoContainer .row .buttons button:hover{
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+.cardInfoContainer .row .buttons button svg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+}
+
+.cardInfoContainer .row h2, .cardInfoContainer .row svg{
+    color: var(--dark-color);
+}
+
+.cardInfoContainer .elements{
+    width: 80%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    gap: 15px 0px;
+}
+
+.cardInfoContainer .elements input{
+    padding: 4px;
+    border: none;
+    border-bottom: 1px solid #c4c4c4;
+    color: #c4c4c4;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+
+
+.cardInfoContainer .elements .activeInput{
+    border-color: #1c1c1c;
+    color: #1c1c1c;
+    cursor: text;
+    outline: none;
+}
+

@@ -24,6 +24,7 @@ Foram utilizadas diversas bibliotecas para o desenvolvimento da aplicação, sen
 **Front-end**
 - **React.js:** para a implementação de _Simple Pages Applications_ (SPA);
 - **React-router-dom:** para o gerenciamento das rotas da aplicação;
+- **React-cookies:** Utilizado para gerenciamento de cookies da aplicação e armazenamento do token;
 - **Material UI:** para a implantação de icones nos componetes;
 - **Reduxjs-toolkit:** para o gerenciamento de variaveis globais;
 - **Mercadopago-sdl:** para a realização de pagamentos com cartão de debito, credito e pix.
@@ -37,5 +38,21 @@ Foram utilizadas diversas bibliotecas para o desenvolvimento da aplicação, sen
 - **JsonWebToken:** Utilizado para criar e gerencias tokens da aplicação;
 - **Cors:** Utilizado para mediar a transferencia de dados HTTP da API e a Aplicação, utilizado principalmente para criar uma *whiteList* de dominios permitidos.
 - **Mercadopago:** biblioteca utilizada para mediar as transações da aplicação com o getway de pagamento de pagamento do mercado livre.
+
+## Futuras implementações:
+
+**Front-end:**
+- Refreash-token;
+- Painel administrativo
+- chat
+
+**Back-end:**
+- Suporte para Refreash-token;
+- Socket.io
+
+**Devops:**
+- Imagem docker do back-end e front-end
+- Docker compose
+- Lançar na heruko utilizando Docker
 
  
